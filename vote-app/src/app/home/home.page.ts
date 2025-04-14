@@ -14,6 +14,26 @@ export class HomePage {
   constructor(private router: Router,
     private modalCtrl: ModalController) { }
 
+  ngOnInit() {
+    if (!localStorage.getItem('participantes')) {
+      localStorage.setItem('participantes', JSON.stringify([
+        { nome: 'Adilson', vota: true, votado: true },
+        { nome: 'Ana Júlia', vota: true, votado: true },
+        { nome: 'Eliane', vota: true, votado: true },
+        { nome: 'Evaldo', vota: true, votado: true },
+        { nome: 'Gustavo', vota: true, votado: true },
+        { nome: 'Heliezer', vota: true, votado: false },
+        { nome: 'Marcelo', vota: true, votado: true },
+        { nome: 'Marco', vota: true, votado: true },
+        { nome: 'Patrícia', vota: true, votado: false },
+        { nome: 'Sabrina', vota: true, votado: true },
+        { nome: 'Samuel', vota: true, votado: true },
+        { nome: 'Tatiane', vota: true, votado: true },
+        { nome: 'Viviane', vota: true, votado: true },
+        { nome: 'William', vota: true, votado: true }
+      ]));
+    }
+  }
   irParaVotacao() {
     this.router.navigateByUrl('/identificar');
   }
