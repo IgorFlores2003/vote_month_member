@@ -36,35 +36,39 @@ export class VotacaoPage {
 
 
   finalizarVotacao() {
+    if (!this.quemVota) {
+      alert('Erro: Nome do votante não encontrado!');
+      this.router.navigateByUrl('/identificar');
+      return;
+    }
+
     const votos = JSON.parse(localStorage.getItem('votos') || '[]');
-  
+
     const nomeNormalizado = this.quemVota.trim().toLowerCase();
     const votanteEspecial = ['patrícia', 'heliezer'].includes(nomeNormalizado);
     const peso = votanteEspecial ? 2 : 1;
-  
+
     votos.push({
       quemVotou: this.quemVota,
       votado: this.votoHomem,
       pontos: peso,
     });
-  
+
     votos.push({
       quemVotou: this.quemVota,
       votado: this.votoMulher,
       pontos: peso,
     });
-  
+
     localStorage.setItem('votos', JSON.stringify(votos));
-  
+
     const jaVotaram = JSON.parse(localStorage.getItem('jaVotaram') || '[]');
     if (!jaVotaram.includes(this.quemVota)) {
       jaVotaram.push(this.quemVota);
       localStorage.setItem('jaVotaram', JSON.stringify(jaVotaram));
     }
-  
+
     localStorage.removeItem('quemEstaVotando');
     this.router.navigateByUrl('/identificar');
   }
-  
-
 }
