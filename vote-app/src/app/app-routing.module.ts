@@ -15,6 +15,14 @@ const routes: Routes = [
     path: 'votacao',
     loadChildren: () => import('./votacao/votacao.module').then( m => m.VotacaoPageModule)
   },
+  {
+    path: 'identificar',
+    loadChildren: () => import('./identificar/identificar.module').then( m => m.IdentificarPageModule)
+  },
+  {
+    path: 'resultado',
+    loadChildren: () => import('./resultado/resultado.module').then( m => m.ResultadoPageModule)
+  },
 ];
 
 @NgModule({

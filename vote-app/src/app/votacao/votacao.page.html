@@ -7,24 +7,29 @@
 <ion-content class="votacao-content">
   <div class="votacao-container">
     <h2 class="votacao-titulo">
-      Clique no seu nome para votar
+      Olá, {{ quemVota }} 👋<br />Vote em um homem e uma mulher
     </h2>
 
+    <h3 class="votacao-subtitulo">Escolha uma mulher</h3>
     <ion-list>
-      <ion-item
-        *ngFor="let membro of membros"
-        button
-        (click)="registrarVoto(membro)"
-        [class.votado]="jaVotou(membro)"
-        [class.nao-votado]="!jaVotou(membro)"
-        class="votacao-item"
-      >
-        <ion-label class="votacao-nome">{{ membro }}</ion-label>
+      <ion-item *ngFor="let mulher of mulheres" button (click)="votar(mulher, 'feminino')"
+        [class.selecionado]="votoMulher === mulher">
+        <ion-label>{{ mulher }}</ion-label>
       </ion-item>
+
     </ion-list>
 
-    <p class="votacao-msg">
-      Seu voto foi registrado com sigilo 🗳️
-    </p>
+    <h3 class="votacao-subtitulo">Escolha um homem</h3>
+    <ion-list>
+      <ion-item *ngFor="let homem of homens" button (click)="votar(homem, 'masculino')"
+        [class.selecionado]="votoHomem === homem">
+        <ion-label>{{ homem }}</ion-label>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-button expand="block" [disabled]="!votoHomem || !votoMulher" (click)="finalizarVotacao()">
+      Confirmar Voto
+    </ion-button>
   </div>
 </ion-content>

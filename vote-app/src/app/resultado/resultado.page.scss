@@ -1,0 +1,55 @@
+.resultado-content {
+  --background: #f9fafb;
+
+  .resultado-container {
+    padding: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .resultado-titulo {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #1f2937;
+  }
+
+  .categoria {
+    margin-bottom: 2rem;
+  }
+
+  .categoria-titulo {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    color: #374151;
+  }
+
+  ion-item {
+    border-radius: 12px;
+    margin: 0.4rem 0;
+    --background: white;
+    --color: #111827;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+  }
+
+  .vencedor {
+    --background: #d1fae5 !important;
+    --color: #065f46 !important;
+    font-weight: 700;
+  }
+
+  ion-badge {
+    font-size: 0.85rem;
+    margin-left: auto;
+  }
+
+  ion-button {
+    margin-top: 1.5rem;
+    font-weight: 600;
+  }
+}

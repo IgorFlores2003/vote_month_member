@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Quem vai votar?</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="identificar-content">
+  <div class="identificar-container">
+    <p class="info">Selecione seu nome abaixo:</p>
+
+    <ion-list>
+      <ion-item
+        *ngFor="let nome of todos"
+        button
+        (click)="selecionarPessoa(nome)"
+        [class.ja-votou]="jaVotou(nome)"
+      >
+        <ion-label>{{ nome }}</ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-button color="danger" expand="block" (click)="limparVotacoes()">
+      Limpar Seleções
+    </ion-button>
+
+    <ion-button
+      color="success"
+      expand="block"
+      class="ion-margin-top"
+      (click)="verResultado()"
+    >
+      Ver Resultado Final 🏁
+    </ion-button>
+  </div>
+</ion-content>

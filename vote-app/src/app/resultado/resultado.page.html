@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="primary" class="text-center py-4">
+    <ion-title class="text-lg font-bold tracking-wide flex items-center justify-center gap-2">
+      🏆 Resultado Final
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="resultado-content">
+  <div class="resultado-container">
+    <h2 class="resultado-titulo text-center text-xl font-bold my-4">🏁 Votação Encerrada</h2>
+
+    <div class="categoria mb-6">
+      <h3 class="categoria-titulo text-lg font-semibold text-center text-pink-600 mb-2">👩 Mulheres</h3>
+      <ion-list lines="none">
+        <ion-item *ngFor="let mulher of mulheresOrdenadas; index as i" [class.vencedor]="mulher.nome === vencedora"
+          class="flex justify-between items-center px-4">
+          <ion-label>
+            <span *ngIf="i === 0">🥇</span>
+            <span *ngIf="i === 1">🥈</span>
+            <span *ngIf="i === 2">🥉</span>
+            {{ mulher.nome }}
+          </ion-label>
+          <ion-badge color="success">{{ mulher.pontos }} ponto(s)</ion-badge>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <div class="categoria mb-6">
+      <h3 class="categoria-titulo text-lg font-semibold text-center text-blue-600 mb-2">👨 Homens</h3>
+      <ion-list lines="none">
+        <ion-item *ngFor="let homem of homensOrdenados; index as i" [class.vencedor]="homem.nome === vencedor"
+          class="flex justify-between items-center px-4">
+          <ion-label>
+            <span *ngIf="i === 0">🥇</span>
+            <span *ngIf="i === 1">🥈</span>
+            <span *ngIf="i === 2">🥉</span>
+            {{ homem.nome }}
+          </ion-label>
+          <ion-badge color="primary">{{ homem.pontos }} ponto(s)</ion-badge>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <ion-button expand="block" color="medium" (click)="voltarInicio()">
+      🔄 Reiniciar Votação
+    </ion-button>
+  </div>
+</ion-content>

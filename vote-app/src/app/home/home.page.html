@@ -1,12 +1,20 @@
-<ion-content [fullscreen]="true" class="tela-inicial">
+<ion-content [fullscreen]="true" class="tela-inicial bg-gradient">
   <div class="conteudo">
-    <h1 class="titulo">Votação do Mês</h1>
+    <h1 class="titulo">🗳️ Votação de Funcionário do Mês</h1>
     <p class="subtitulo">
-      Clique no botão abaixo para iniciar a votação de forma sigilosa 🗳️
+      Participe da escolha!<br />
+      Seu voto é sigiloso e importante.
     </p>
 
     <ion-button expand="block" class="botao" (click)="irParaVotacao()">
       Iniciar Votação
     </ion-button>
+  </div>
+  <div class="relative mt-12">
+    <div
+      class="absolute inset-0 w-20 h-20 bg-white rounded-full z-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    </div>
+    <img src="assets/icon/ciganoLogo.png" alt="Logo Cigano"
+      class="relative z-10 w-32 h-auto rounded-xl shadow-xl border-2 border-white" />
   </div>
 </ion-content>

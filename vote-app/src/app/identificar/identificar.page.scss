@@ -1,0 +1,49 @@
+.identificar-content {
+  --background: #f9fafb;
+
+  .identificar-container {
+    padding: 1.5rem;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .info {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 1rem;
+  }
+
+  .nome-item {
+    border-radius: 12px;
+    margin: 0.4rem 0;
+    --background: white;
+    --color: #111827;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    transition: transform 0.15s ease;
+  }
+
+  .nome-item:hover {
+    transform: scale(1.01);
+  }
+
+  .ja-votou {
+    --background: #d1fae5 !important;
+    --color: #065f46 !important;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 128, 0, 0.1);
+  }
+
+  .botao-limpar {
+    margin-top: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+
+  .botao-finalizar {
+    margin-top: 1rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+}
