@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Votação</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="votacao-content">
+  <div class="votacao-container">
+    <h2 class="votacao-titulo">
+      Clique no seu nome para votar
+    </h2>
+
+    <ion-list>
+      <ion-item
+        *ngFor="let membro of membros"
+        button
+        (click)="registrarVoto(membro)"
+        [class.votado]="jaVotou(membro)"
+        [class.nao-votado]="!jaVotou(membro)"
+        class="votacao-item"
+      >
+        <ion-label class="votacao-nome">{{ membro }}</ion-label>
+      </ion-item>
+    </ion-list>
+
+    <p class="votacao-msg">
+      Seu voto foi registrado com sigilo 🗳️
+    </p>
+  </div>
+</ion-content>
