@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-title>Configuração</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="fechar()">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding scroll-content" scroll-y="true">
+  <div class="config-container">
+    <h2 class="text-lg font-semibold mb-2">Quem pode votar?</h2>
+    <ion-item *ngFor="let pessoa of pessoas">
+      <ion-checkbox slot="start" [(ngModel)]="pessoa.vota"></ion-checkbox>
+      <ion-label>{{ pessoa.nome }}</ion-label>
+    </ion-item>
+
+    <h2 class="text-lg font-semibold mt-4 mb-2">Quem pode ser votado?</h2>
+    <ion-item *ngFor="let pessoa of pessoas">
+      <ion-checkbox slot="start" [(ngModel)]="pessoa.votado"></ion-checkbox>
+      <ion-label>{{ pessoa.nome }}</ion-label>
+    </ion-item>
+
+    <div class="pb-16"></div>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-padding ion-no-border">
+  <ion-button expand="block" (click)="salvar()">
+    Salvar Configurações
+  </ion-button>
+</ion-footer>

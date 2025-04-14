@@ -8,12 +8,19 @@ import { Router } from '@angular/router';
   standalone: false
 })
 export class IdentificarPage {
-  todos = [
+  todos: string[] = [];
+
+  participantes = [
     'Adilson', 'Ana Júlia', 'Eliane', 'Evaldo', 'Gustavo', 'Heliezer',
     'Marcelo', 'Marco', 'Patrícia', 'Sabrina', 'Samuel', 'Tatiane', 'Viviane', 'William'
   ].sort();
 
   constructor(private router: Router) { }
+
+  ngOnInit() {
+    const dados = JSON.parse(localStorage.getItem('participantes') || '[]');
+    this.todos = dados.filter((p: any) => p.vota).map((p: any) => p.nome).sort();
+  }
 
   selecionarPessoa(nome: string) {
     localStorage.setItem('quemEstaVotando', nome);

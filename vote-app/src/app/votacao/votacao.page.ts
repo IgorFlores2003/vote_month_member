@@ -12,18 +12,36 @@ export class VotacaoPage {
   votoHomem: string | null = null;
   votoMulher: string | null = null;
 
-  mulheres = ['Ana Júlia', 'Eliane', 'Sabrina', 'Tatiane', 'Viviane'].sort();
-  homens = ['Adilson', 'Evaldo', 'Gustavo', 'Marcelo', 'Marco', 'Samuel', 'William'].sort();
+  mulheres: string[] = [];
+  homens: string[] = [];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   ngOnInit() {
     const votante = localStorage.getItem('quemEstaVotando');
     if (!votante) {
       this.router.navigateByUrl('/identificar');
+      return;
     }
 
-    this.quemVota = votante!;
+    this.quemVota = votante;
+
+    const dados = JSON.parse(localStorage.getItem('participantes') || '[]');
+
+    this.mulheres = dados
+      .filter((p: any) => p.votado && this.eMulher(p.nome))
+      .map((p: any) => p.nome)
+      .sort();
+
+    this.homens = dados
+      .filter((p: any) => p.votado && !this.eMulher(p.nome))
+      .map((p: any) => p.nome)
+      .sort();
+  }
+
+  eMulher(nome: string): boolean {
+    const nomesMulheres = ['Ana Júlia', 'Eliane', 'Patrícia', 'Sabrina', 'Tatiane', 'Viviane'];
+    return nomesMulheres.includes(nome);
   }
 
   votar(nome: string, genero: 'masculino' | 'feminino') {
@@ -33,7 +51,6 @@ export class VotacaoPage {
       this.votoMulher = nome;
     }
   }
-
 
   finalizarVotacao() {
     if (!this.quemVota) {
