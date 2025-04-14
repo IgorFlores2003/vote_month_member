@@ -1,7 +1,10 @@
 <ion-content [fullscreen]="true" class="tela-inicial bg-gradient relative">
-  <div class="conteudo">
-    <h1 class="titulo">🗳️ Votação de Funcionário do Mês</h1>
-    <p class="subtitulo">
+  <div class="conteudo px-4 py-6 flex flex-col items-center justify-center min-h-[100vh] overflow-auto">
+    <h1 class="titulo text-2xl font-bold text-center text-white mb-4">
+      🗳️ Votação de Funcionário do Mês
+    </h1>
+
+    <p class="subtitulo text-white/90 text-center text-base mb-6">
       Participe da escolha!<br />
       Seu voto é sigiloso e importante.
     </p>
@@ -9,6 +12,14 @@
     <ion-button expand="block" class="botao" (click)="irParaVotacao()">
       Iniciar Votação
     </ion-button>
+
+    <div class="relative mt-12 mb-20 w-full flex justify-center items-center">
+      <div
+        class="absolute w-20 h-20 bg-white rounded-full z-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+      </div>
+      <img src="assets/icon/ciganoLogo.png" alt="Logo Cigano"
+        class="relative z-10 w-32 h-auto rounded-xl shadow-xl border-2 border-white" />
+    </div>
   </div>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
@@ -16,12 +27,4 @@
       <ion-icon name="settings-outline" class="text-gray-600 text-3xl"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
-  <div class="relative mt-12 mb-12">
-    <div
-      class="absolute inset-0 w-20 h-20 bg-white rounded-full z-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-    </div>
-    <img src="assets/icon/ciganoLogo.png" alt="Logo Cigano"
-      class="relative z-10 w-32 h-auto rounded-xl shadow-xl border-2 border-white" />
-  </div>
 </ion-content>

@@ -15,7 +15,7 @@ export class VotacaoPage {
   mulheres: string[] = [];
   homens: string[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   ngOnInit() {
     const votante = localStorage.getItem('quemEstaVotando');
@@ -28,20 +28,32 @@ export class VotacaoPage {
 
     const dados = JSON.parse(localStorage.getItem('participantes') || '[]');
 
+    // Nomes que nunca podem ser votados
+    const bloqueados = ['patrícia', 'heliezer'];
+
     this.mulheres = dados
-      .filter((p: any) => p.votado && this.eMulher(p.nome))
+      .filter((p: any) =>
+        p.votado &&
+        this.eMulher(p.nome) &&
+        !bloqueados.includes(p.nome.trim().toLowerCase())
+      )
       .map((p: any) => p.nome)
       .sort();
 
     this.homens = dados
-      .filter((p: any) => p.votado && !this.eMulher(p.nome))
+      .filter((p: any) =>
+        p.votado &&
+        !this.eMulher(p.nome) &&
+        !bloqueados.includes(p.nome.trim().toLowerCase())
+      )
       .map((p: any) => p.nome)
       .sort();
   }
 
   eMulher(nome: string): boolean {
-    const nomesMulheres = ['Ana Júlia', 'Eliane', 'Patrícia', 'Sabrina', 'Tatiane', 'Viviane'];
-    return nomesMulheres.includes(nome);
+    const nomeNormalizado = nome.trim().toLowerCase();
+    const nomesMulheres = ['ana júlia', 'eliane', 'patrícia', 'sabrina', 'tatiane', 'viviane'];
+    return nomesMulheres.includes(nomeNormalizado);
   }
 
   votar(nome: string, genero: 'masculino' | 'feminino') {

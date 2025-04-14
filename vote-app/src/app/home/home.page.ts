@@ -29,16 +29,12 @@ export class HomePage {
 
     await modal.present();
 
-    // Espera o fechamento do modal
     const { role } = await modal.onWillDismiss();
 
-    // Atualiza localStorage ou estado se necessário
-    this.carregarParticipantes(); // ← Crie esse método se necessário
+    this.carregarParticipantes();
   }
   carregarParticipantes() {
     const dados = JSON.parse(localStorage.getItem('participantes') || '[]');
-    // você pode armazenar em uma variável local, se quiser
-    console.log(dados); // ou atualizar a UI
   }
 
 }

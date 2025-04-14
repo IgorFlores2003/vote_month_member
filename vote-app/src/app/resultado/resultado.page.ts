@@ -18,50 +18,53 @@ export class ResultadoPage implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    const dados = JSON.parse(localStorage.getItem('votos') || '[]');
     this.tocarMusiquinha();
+
+    const votos = JSON.parse(localStorage.getItem('votos') || '[]') as {
+      quemVotou: string;
+      votado: string;
+      pontos: number;
+    }[];
 
     const contagem: Record<string, number> = {};
 
-    for (const voto of dados) {
-      const nomeNormalizado = voto.votado.trim().toLowerCase();
+    votos.forEach(({ votado, pontos }) => {
+      const nome = votado.trim().toLowerCase();
+      contagem[nome] = (contagem[nome] || 0) + (pontos || 1);
+    });
 
-      if (!contagem[nomeNormalizado]) {
-        contagem[nomeNormalizado] = 0;
-      }
+    const participantes = JSON.parse(localStorage.getItem('participantes') || '[]') as {
+      nome: string;
+      vota: boolean;
+      votado: boolean;
+    }[];
 
-      contagem[nomeNormalizado] += voto.pontos || 1;
-    }
+    const mulheres = participantes
+      .filter((p: any) => p.votado && this.eMulher(p.nome) && p.nome !== 'Patrícia')
+      .map((p: any) => p.nome);
 
+    const homens = participantes
+      .filter((p: any) => p.votado && !this.eMulher(p.nome) && p.nome !== 'Heliezer')
+      .map((p: any) => p.nome);
 
-    const mulheres = ['Ana Júlia', 'Eliane', 'Sabrina', 'Tatiane', 'Viviane'];
-    const homens = ['Adilson', 'Evaldo', 'Gustavo', 'Marcelo', 'Marco', 'Samuel', 'William'];
+    this.mulheresOrdenadas = this.ordenarPorPontos(mulheres, contagem);
+    this.homensOrdenados = this.ordenarPorPontos(homens, contagem);
 
-    this.mulheresOrdenadas = mulheres
-      .map(nomeOriginal => {
-        const nomeNormalizado = nomeOriginal.trim().toLowerCase();
-        return {
-          nome: nomeOriginal,
-          pontos: contagem[nomeNormalizado] || 0
-        };
-      })
-      .sort((a, b) => b.pontos - a.pontos);
+    this.vencedora = this.mulheresOrdenadas[0]?.nome || '';
+    this.vencedor = this.homensOrdenados[0]?.nome || '';
+  }
 
+  private ordenarPorPontos(nomes: string[], contagem: Record<string, number>) {
+    return nomes.map(nome => ({
+      nome,
+      pontos: contagem[nome.trim().toLowerCase()] || 0
+    }))
+      .sort((a: { pontos: number }, b: { pontos: number }) => b.pontos - a.pontos);
+  }
 
-    this.homensOrdenados = homens
-      .map(nomeOriginal => {
-        const nomeNormalizado = nomeOriginal.trim().toLowerCase();
-        return {
-          nome: nomeOriginal,
-          pontos: contagem[nomeNormalizado] || 0
-        };
-      })
-      .sort((a, b) => b.pontos - a.pontos);
-
-
-
-    this.vencedora = this.mulheresOrdenadas[0].nome;
-    this.vencedor = this.homensOrdenados[0].nome;
+  private eMulher(nome: string): boolean {
+    const mulheres = ['Ana Júlia', 'Eliane', 'Sabrina', 'Tatiane', 'Viviane', 'Patrícia'];
+    return mulheres.map(n => n.trim().toLowerCase()).includes(nome.trim().toLowerCase());
   }
 
   tocarMusiquinha() {
