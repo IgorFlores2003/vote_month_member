@@ -25,6 +25,7 @@ export class VotacaoPage {
     }
 
     this.quemVota = votante;
+    const quemVotaLower = this.quemVota.trim().toLowerCase();
 
     const dados = JSON.parse(localStorage.getItem('participantes') || '[]');
 
@@ -32,20 +33,36 @@ export class VotacaoPage {
     const bloqueados = ['patrícia', 'heliezer'];
 
     this.mulheres = dados
-      .filter((p: any) =>
-        p.votado &&
-        this.eMulher(p.nome) &&
-        !bloqueados.includes(p.nome.trim().toLowerCase())
-      )
+      .filter((p: any) => {
+        const nome = p.nome.trim();
+        const nomeLower = nome.toLowerCase();
+
+        return (
+          p.votado &&
+          this.eMulher(nome) &&
+          !bloqueados.includes(nomeLower) &&
+          nomeLower !== quemVotaLower && // não vota em si mesma
+          !(
+            (quemVotaLower === 'sabrina' && nomeLower === 'tatiane') ||
+            (quemVotaLower === 'tatiane' && nomeLower === 'sabrina')
+          )
+        );
+      })
       .map((p: any) => p.nome)
       .sort();
 
     this.homens = dados
-      .filter((p: any) =>
-        p.votado &&
-        !this.eMulher(p.nome) &&
-        !bloqueados.includes(p.nome.trim().toLowerCase())
-      )
+      .filter((p: any) => {
+        const nome = p.nome.trim();
+        const nomeLower = nome.toLowerCase();
+
+        return (
+          p.votado &&
+          !this.eMulher(nome) &&
+          !bloqueados.includes(nomeLower) &&
+          nomeLower !== quemVotaLower // não vota em si mesmo
+        );
+      })
       .map((p: any) => p.nome)
       .sort();
   }
@@ -72,7 +89,6 @@ export class VotacaoPage {
     }
 
     const votos = JSON.parse(localStorage.getItem('votos') || '[]');
-
     const nomeNormalizado = this.quemVota.trim().toLowerCase();
     const votanteEspecial = ['patrícia', 'heliezer'].includes(nomeNormalizado);
     const peso = votanteEspecial ? 2 : 1;

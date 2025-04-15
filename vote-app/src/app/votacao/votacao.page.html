@@ -7,10 +7,11 @@
 <ion-content class="votacao-content">
   <div class="votacao-container">
     <h2 class="votacao-titulo">
-      Olá, {{ quemVota }} 👋<br />Vote em um homem e uma mulher
+      Olá, {{ quemVota }} 👋<br />Vote em um Funcionário e uma funcionária:
     </h2>
 
-    <h3 class="votacao-subtitulo">Escolha uma mulher</h3>
+    <h3 class="votacao-subtitulo">Escolha uma funcionária:
+    </h3>
     <ion-list>
       <ion-item *ngFor="let mulher of mulheres" button (click)="votar(mulher, 'feminino')"
         [class.selecionado]="votoMulher === mulher">
@@ -19,15 +20,13 @@
 
     </ion-list>
 
-    <h3 class="votacao-subtitulo">Escolha um homem</h3>
+    <h3 class="votacao-subtitulo">Escolha um Funcionário:</h3>
     <ion-list>
       <ion-item *ngFor="let homem of homens" button (click)="votar(homem, 'masculino')"
         [class.selecionado]="votoHomem === homem">
         <ion-label>{{ homem }}</ion-label>
       </ion-item>
-
     </ion-list>
-
     <ion-button expand="block" [disabled]="!votoHomem || !votoMulher" (click)="finalizarVotacao()">
       Confirmar Voto
     </ion-button>
